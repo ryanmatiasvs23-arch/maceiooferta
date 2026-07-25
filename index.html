@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaymson Davis | Ofertas De Maceió</title>
+<title>Jaymson Davis | Rei das Ofertas Maceió</title>
+<meta name="description" content="Influenciador digital em Maceió. +30K seguidores e alcance de até 120 mil visualizações para sua empresa em Alagoas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -303,6 +304,12 @@ input, textarea, button { font-family: inherit; }
   filter: blur(10px);
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
+}
+.hero-bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .hero-grid {
   position: relative;
@@ -489,21 +496,99 @@ input, textarea, button { font-family: inherit; }
   justify-content: center;
   padding: 4px;
 }
-.empresas-slide .profile-card {
+/* ---------- Empresas atendidas: TiltedCard ---------- */
+.empresa-tilt-card {
   width: 100%;
-  max-width: 420px;
-  transform-origin: center;
-  animation: cardZoomGlow 4.5s ease-in-out infinite;
-  border: 1px solid var(--border);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.empresas-slide .profile-card:hover {
-  transform: scale(1.06);
-  border-color: var(--gold);
-  box-shadow: 0 20px 50px -20px var(--pink-glow);
+.tilted-card-figure {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+  perspective: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tilted-card-inner {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  transform-style: preserve-3d;
+  border-radius: 18px;
+  animation: tiltCardGlowPulse 4.5s ease-in-out infinite;
+}
+.tilted-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  will-change: transform;
+  transform: translateZ(0);
+}
+.tilted-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 18px;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(30px);
+}
+.empresa-overlay-name {
+  width: 100%;
+  padding: 14px 14px 12px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(10,9,16,0) 0%, rgba(10,9,16,0.82) 78%);
+}
+.tilted-card-caption {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #2d2d2d;
+  opacity: 0;
+  z-index: 3;
+  white-space: nowrap;
+}
+@keyframes tiltCardGlowPulse {
+  0%, 65%, 100% { filter: drop-shadow(0 20px 45px rgba(0,0,0,0.45)); }
+  82% { filter: drop-shadow(0 0 26px var(--pink-glow)) drop-shadow(0 0 16px var(--gold-glow)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .empresas-slide .profile-card { animation: none; }
+  .tilted-card-inner { animation: none; }
+}
+@media (max-width: 480px) {
+  .tilted-card-figure,
+  .tilted-card-inner,
+  .tilted-card-img {
+    width: 200px;
+    height: 200px;
+  }
+  .tilted-card-caption { display: none; }
 }
 
 /* ---------- Videos ---------- */
@@ -903,7 +988,7 @@ input, textarea, button { font-family: inherit; }
 
 <!-- ===================== 1. HOME / HERO ===================== -->
 <section id="inicio" class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" id="heroRaysBg" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div class="hero-content reveal">
       <p class="kicker">Influência local que move negócios</p>
@@ -966,156 +1051,7 @@ input, textarea, button { font-family: inherit; }
       <div class="empresas-carousel">
         <button class="carousel-btn carousel-prev" id="empresaPrev" type="button" aria-label="Loja anterior">‹</button>
         <div class="empresas-track" id="empresaTrack">
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>LOJA BELLA MODA</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@bellamoda_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>HAMBURGUERIA DO RAFA</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@hamburgueriadorafa</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>STUDIO TL ESTÉTICA</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@studiotl_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>ÓTICA VISÃO CLARA</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@oticavisaoclara</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>DOCES DA JU</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@docesdaju_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>BARBEARIA REAL</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@barbeariareal_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>STUDIO LS CABELO</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@studiols_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>AUTO PEÇAS ALMEIDA</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@autopecasalmeida</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>DOCERIA MELO</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@doceriamelo_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
-          <div class="empresas-slide">
-            <div class="profile-card">
-              <div class="profile-photo">
-                <svg viewBox="0 0 24 24" width="70" height="70" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.52.3l4.28-3.67a.5.5 0 0 1 .8.52L19.02 16.3a1 1 0 0 1-.96.73H5.81a1 1 0 0 1-.96-.73L2 6.02a.5.5 0 0 1 .8-.52l4.28 3.67a1 1 0 0 0 1.52-.3z"/><path d="M5 21h14"/></svg>
-                <span>PET SHOP AMIGO FIEL</span>
-              </div>
-              <div class="profile-meta">
-                <div>
-                  <strong>@amigofiel_maceio</strong>
-                  <small>Maceió, Alagoas</small>
-                </div>
-                <a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>
-              </div>
-            </div>
-          </div>
+          <!-- Slides gerados via JS (ver função renderEmpresasSlides) usando o componente TiltedCard -->
         </div>
         <button class="carousel-btn carousel-next" id="empresaNext" type="button" aria-label="Próxima loja">›</button>
       </div>
@@ -1544,6 +1480,374 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
+
+  // ===================== Empresas atendidas — TiltedCard =====================
+  // Dados das empresas (troque aqui nome/handle/cores para adicionar ou editar cards)
+  const empresasData = [
+    { name: 'Loja Bella Moda',        handle: '@bellamoda_maceio',       initials: 'BM', from: '#ef2d76', to: '#f3c65c' },
+    { name: 'Hamburgueria do Rafa',   handle: '@hamburgueriadorafa',     initials: 'HR', from: '#f3c65c', to: '#ef2d76' },
+    { name: 'Studio TL Estética',     handle: '@studiotl_maceio',        initials: 'TL', from: '#ff5f9e', to: '#ffe2a1' },
+    { name: 'Ótica Visão Clara',      handle: '@oticavisaoclara',        initials: 'VC', from: '#b0246e', to: '#f3c65c' },
+    { name: 'Doces da Ju',            handle: '@docesdaju_maceio',       initials: 'DJ', from: '#ef2d76', to: '#ffe2a1' },
+    { name: 'Barbearia Real',         handle: '@barbeariareal_maceio',   initials: 'BR', from: '#d4145a', to: '#f3c65c' },
+    { name: 'Studio LS Cabelo',       handle: '@studiols_maceio',        initials: 'LS', from: '#f3c65c', to: '#ff5f9e' },
+    { name: 'Auto Peças Almeida',     handle: '@autopecasalmeida',       initials: 'AA', from: '#7a1740', to: '#f3c65c' },
+    { name: 'Doceria Melo',           handle: '@doceriamelo_maceio',     initials: 'DM', from: '#ef2d76', to: '#d99a2b' },
+    { name: 'Pet Shop Amigo Fiel',    handle: '@amigofiel_maceio',       initials: 'AF', from: '#b23a6b', to: '#ffe2a1' },
+  ];
+  const empresaLocation = 'Maceió, Alagoas';
+
+  // Gera uma imagem placeholder (gradiente + iniciais) em SVG — troque por uma foto/logo real
+  // bastando editar o "imageSrc" usado abaixo (ex.: 'assets/empresa1.jpg').
+  function placeholderLogo(initials, from, to) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="${from}"/>
+          <stop offset="1" stop-color="${to}"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="400" fill="url(#g)"/>
+      <text x="50%" y="54%" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="rgba(255,255,255,0.92)" text-anchor="middle" dominant-baseline="middle">${initials}</text>
+    </svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  // Monta cada slide usando a estrutura do componente TiltedCard (React Bits)
+  function renderEmpresasSlides() {
+    const track = document.getElementById('empresaTrack');
+    if (!track) return;
+
+    empresasData.forEach(emp => {
+      const slide = document.createElement('div');
+      slide.className = 'empresas-slide';
+
+      const card = document.createElement('div');
+      card.className = 'empresa-tilt-card';
+
+      const figure = document.createElement('figure');
+      figure.className = 'tilted-card-figure';
+      figure.dataset.rotateAmplitude = '12';
+      figure.dataset.scaleOnHover = '1.12';
+
+      const inner = document.createElement('div');
+      inner.className = 'tilted-card-inner';
+
+      const img = document.createElement('img');
+      img.src = placeholderLogo(emp.initials, emp.from, emp.to);
+      img.alt = emp.name + ' — logo';
+      img.className = 'tilted-card-img';
+      img.loading = 'lazy';
+      inner.appendChild(img);
+
+      const overlay = document.createElement('div');
+      overlay.className = 'tilted-card-overlay';
+      overlay.innerHTML = '<span class="empresa-overlay-name">' + emp.name + '</span>';
+      inner.appendChild(overlay);
+
+      figure.appendChild(inner);
+
+      const caption = document.createElement('figcaption');
+      caption.className = 'tilted-card-caption';
+      caption.textContent = emp.handle;
+      figure.appendChild(caption);
+
+      card.appendChild(figure);
+
+      const meta = document.createElement('div');
+      meta.className = 'profile-meta';
+      meta.innerHTML =
+        '<div><strong>' + emp.handle + '</strong><small>' + empresaLocation + '</small></div>' +
+        '<a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>';
+      card.appendChild(meta);
+
+      slide.appendChild(card);
+      track.appendChild(slide);
+    });
+  }
+
+  // Comportamento de tilt 3D + tooltip, equivalente ao componente TiltedCard (sem depender de React/motion)
+  function initTiltedCards(root) {
+    (root || document).querySelectorAll('.tilted-card-figure').forEach(figure => {
+      if (figure.dataset.tiltReady) return;
+      figure.dataset.tiltReady = '1';
+
+      const rotateAmplitude = parseFloat(figure.dataset.rotateAmplitude || '14');
+      const scaleOnHover = parseFloat(figure.dataset.scaleOnHover || '1.1');
+      const inner = figure.querySelector('.tilted-card-inner');
+      const caption = figure.querySelector('.tilted-card-caption');
+
+      const state = { rx: 0, ry: 0, scale: 1, opacity: 0, capRotate: 0 };
+      const target = { rx: 0, ry: 0, scale: 1, opacity: 0, capRotate: 0, x: 0, y: 0 };
+      let lastY = 0;
+      let raf = null;
+
+      function tick() {
+        state.rx += (target.rx - state.rx) * 0.16;
+        state.ry += (target.ry - state.ry) * 0.16;
+        state.scale += (target.scale - state.scale) * 0.16;
+        state.opacity += (target.opacity - state.opacity) * 0.22;
+        state.capRotate += (target.capRotate - state.capRotate) * 0.25;
+
+        if (inner) {
+          inner.style.transform = 'rotateX(' + state.rx.toFixed(2) + 'deg) rotateY(' + state.ry.toFixed(2) + 'deg) scale(' + state.scale.toFixed(3) + ')';
+        }
+        if (caption) {
+          caption.style.transform = 'translate(' + target.x.toFixed(1) + 'px, ' + target.y.toFixed(1) + 'px) rotate(' + state.capRotate.toFixed(2) + 'deg)';
+          caption.style.opacity = state.opacity.toFixed(2);
+        }
+
+        const stillMoving =
+          Math.abs(target.rx - state.rx) > 0.01 ||
+          Math.abs(target.ry - state.ry) > 0.01 ||
+          Math.abs(target.scale - state.scale) > 0.001 ||
+          Math.abs(target.opacity - state.opacity) > 0.001;
+
+        raf = stillMoving ? requestAnimationFrame(tick) : null;
+      }
+      function ensureLoop() {
+        if (!raf) raf = requestAnimationFrame(tick);
+      }
+
+      figure.addEventListener('mousemove', (e) => {
+        const rect = figure.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left - rect.width / 2;
+        const offsetY = e.clientY - rect.top - rect.height / 2;
+
+        target.rx = (offsetY / (rect.height / 2)) * -rotateAmplitude;
+        target.ry = (offsetX / (rect.width / 2)) * rotateAmplitude;
+        target.x = e.clientX - rect.left;
+        target.y = e.clientY - rect.top;
+
+        const velocityY = offsetY - lastY;
+        target.capRotate = -velocityY * 0.6;
+        lastY = offsetY;
+
+        ensureLoop();
+      });
+      figure.addEventListener('mouseenter', () => {
+        target.scale = scaleOnHover;
+        target.opacity = 1;
+        ensureLoop();
+      });
+      figure.addEventListener('mouseleave', () => {
+        target.opacity = 0;
+        target.scale = 1;
+        target.rx = 0;
+        target.ry = 0;
+        target.capRotate = 0;
+        ensureLoop();
+      });
+    });
+  }
+
+  renderEmpresasSlides();
+  initTiltedCards();
+
+  // ===================== Fundo do Hero — SideRays =====================
+  // Reimplementação em WebGL puro (sem dependência da lib "ogl"), mesmo shader do componente original.
+  function initSideRaysBackground(container, opts) {
+    if (!container) return;
+    const cfg = Object.assign({
+      speed: 1.8,
+      rayColor1: '#f3c65c',
+      rayColor2: '#ef2d76',
+      intensity: 1.4,
+      spread: 1.6,
+      origin: 'top-right',
+      tilt: 0,
+      saturation: 1.25,
+      blend: 0.55,
+      falloff: 1.7,
+      opacity: 0.85
+    }, opts || {});
+
+    function hexToRgb(hex) {
+      const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
+    }
+    function originToFlip(origin) {
+      switch (origin) {
+        case 'top-left': return [1, 0];
+        case 'bottom-right': return [0, 1];
+        case 'bottom-left': return [1, 1];
+        default: return [0, 0];
+      }
+    }
+
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+
+    const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false }) ||
+               canvas.getContext('experimental-webgl', { alpha: true, premultipliedAlpha: false });
+    if (!gl) return; // sem suporte a WebGL: mantém o gradiente CSS de fundo já existente
+
+    const vertSrc = 'attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }';
+    const fragSrc = [
+      'precision highp float;',
+      'uniform float iTime;',
+      'uniform vec2 iResolution;',
+      'uniform float iSpeed;',
+      'uniform vec3 iRayColor1;',
+      'uniform vec3 iRayColor2;',
+      'uniform float iIntensity;',
+      'uniform float iSpread;',
+      'uniform float iFlipX;',
+      'uniform float iFlipY;',
+      'uniform float iTilt;',
+      'uniform float iSaturation;',
+      'uniform float iBlend;',
+      'uniform float iFalloff;',
+      'uniform float iOpacity;',
+      'float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {',
+      '  vec2 sourceToCoord = coord - raySource;',
+      '  float cosAngle = dot(normalize(sourceToCoord), rayRefDirection);',
+      '  return clamp(',
+      '    (0.45 + 0.15 * sin(cosAngle * seedA + iTime * speed)) +',
+      '    (0.3 + 0.2 * cos(-cosAngle * seedB + iTime * speed)),',
+      '    0.0, 1.0) *',
+      '    clamp((iResolution.x - length(sourceToCoord)) / iResolution.x, 0.5, 1.0);',
+      '}',
+      'void main() {',
+      '  vec2 fragCoord = gl_FragCoord.xy;',
+      '  if (iFlipX > 0.5) fragCoord.x = iResolution.x - fragCoord.x;',
+      '  if (iFlipY > 0.5) fragCoord.y = iResolution.y - fragCoord.y;',
+      '  vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);',
+      '  vec2 rayPos = vec2(iResolution.x * 1.1, -0.5 * iResolution.y);',
+      '  float tiltRad = iTilt * 3.14159265 / 180.0;',
+      '  float cs = cos(tiltRad);',
+      '  float sn = sin(tiltRad);',
+      '  vec2 rel = coord - rayPos;',
+      '  vec2 tiltedCoord = vec2(rel.x * cs - rel.y * sn, rel.x * sn + rel.y * cs) + rayPos;',
+      '  float halfSpread = iSpread * 0.275;',
+      '  vec2 rayRefDir1 = normalize(vec2(cos(0.785398 + halfSpread), sin(0.785398 + halfSpread)));',
+      '  vec2 rayRefDir2 = normalize(vec2(cos(0.785398 - halfSpread), sin(0.785398 - halfSpread)));',
+      '  vec4 rays1 = vec4(iRayColor1, 1.0) * rayStrength(rayPos, rayRefDir1, tiltedCoord, 36.2214, 21.11349, iSpeed);',
+      '  vec4 rays2 = vec4(iRayColor2, 1.0) * rayStrength(rayPos, rayRefDir2, tiltedCoord, 22.3991, 18.0234, iSpeed * 0.2);',
+      '  vec4 color = rays1 * (1.0 - iBlend) * 0.9 + rays2 * iBlend * 0.9;',
+      '  float distanceToLight = length(fragCoord.xy - vec2(rayPos.x, iResolution.y - rayPos.y)) / iResolution.y;',
+      '  float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);',
+      '  color.rgb *= brightness;',
+      '  float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));',
+      '  color.rgb = mix(vec3(gray), color.rgb, iSaturation);',
+      '  color.a = max(color.r, max(color.g, color.b)) * iOpacity;',
+      '  gl_FragColor = color;',
+      '}'
+    ].join('\n');
+
+    function compileShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('SideRays shader error:', gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const vertShader = compileShader(gl.VERTEX_SHADER, vertSrc);
+    const fragShader = compileShader(gl.FRAGMENT_SHADER, fragSrc);
+    if (!vertShader || !fragShader) return;
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertShader);
+    gl.attachShader(program, fragShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('SideRays program link error:', gl.getProgramInfoLog(program));
+      return;
+    }
+    gl.useProgram(program);
+
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const positionLoc = gl.getAttribLocation(program, 'position');
+    gl.enableVertexAttribArray(positionLoc);
+    gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const uniforms = {};
+    ['iTime', 'iResolution', 'iSpeed', 'iRayColor1', 'iRayColor2', 'iIntensity', 'iSpread',
+      'iFlipX', 'iFlipY', 'iTilt', 'iSaturation', 'iBlend', 'iFalloff', 'iOpacity'
+    ].forEach(name => { uniforms[name] = gl.getUniformLocation(program, name); });
+
+    const [flipX, flipY] = originToFlip(cfg.origin);
+    const rgb1 = hexToRgb(cfg.rayColor1);
+    const rgb2 = hexToRgb(cfg.rayColor2);
+
+    gl.uniform1f(uniforms.iSpeed, cfg.speed);
+    gl.uniform3f(uniforms.iRayColor1, rgb1[0], rgb1[1], rgb1[2]);
+    gl.uniform3f(uniforms.iRayColor2, rgb2[0], rgb2[1], rgb2[2]);
+    gl.uniform1f(uniforms.iIntensity, cfg.intensity);
+    gl.uniform1f(uniforms.iSpread, cfg.spread);
+    gl.uniform1f(uniforms.iFlipX, flipX);
+    gl.uniform1f(uniforms.iFlipY, flipY);
+    gl.uniform1f(uniforms.iTilt, cfg.tilt);
+    gl.uniform1f(uniforms.iSaturation, cfg.saturation);
+    gl.uniform1f(uniforms.iBlend, cfg.blend);
+    gl.uniform1f(uniforms.iFalloff, cfg.falloff);
+    gl.uniform1f(uniforms.iOpacity, cfg.opacity);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    let raf = null;
+    let visible = false;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = container.clientWidth || 1;
+      const h = container.clientHeight || 1;
+      canvas.width = Math.max(1, Math.floor(w * dpr));
+      canvas.height = Math.max(1, Math.floor(h * dpr));
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(uniforms.iResolution, canvas.width, canvas.height);
+    }
+
+    function render(t) {
+      if (!visible) { raf = null; return; }
+      gl.uniform1f(uniforms.iTime, t * 0.001);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      raf = requestAnimationFrame(render);
+    }
+    function start() {
+      if (!raf) raf = requestAnimationFrame(render);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible) start();
+      }, { threshold: 0.05 });
+      io.observe(container);
+    } else {
+      visible = true;
+      start();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      visible = !document.hidden;
+      if (visible) start();
+    });
+  }
+
+  (function () {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const goldColor = (rootStyles.getPropertyValue('--gold') || '#f3c65c').trim();
+    const pinkColor = (rootStyles.getPropertyValue('--pink') || '#ef2d76').trim();
+    initSideRaysBackground(document.getElementById('heroRaysBg'), {
+      rayColor1: goldColor,
+      rayColor2: pinkColor,
+      origin: 'top-right'
+    });
+  })();
 
   // Carrossel de empresas atendidas (uma foto por vez)
   const empresaTrack = document.getElementById('empresaTrack');
