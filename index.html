@@ -1577,18 +1577,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===================== Empresas atendidas — TiltedCard =====================
   // Dados das empresas (troque aqui nome/handle/cores para adicionar ou editar cards)
   const empresasData = [
-    { name: 'Loja Bella Moda',        handle: '@bellamoda_maceio',       initials: 'BM', from: '#ef2d76', to: '#f3c65c' },
-    { name: 'Hamburgueria do Rafa',   handle: '@hamburgueriadorafa',     initials: 'HR', from: '#f3c65c', to: '#ef2d76' },
-    { name: 'Studio TL Estética',     handle: '@studiotl_maceio',        initials: 'TL', from: '#ff5f9e', to: '#ffe2a1' },
-    { name: 'Ótica Visão Clara',      handle: '@oticavisaoclara',        initials: 'VC', from: '#b0246e', to: '#f3c65c' },
-    { name: 'Doces da Ju',            handle: '@docesdaju_maceio',       initials: 'DJ', from: '#ef2d76', to: '#ffe2a1' },
-    { name: 'Barbearia Real',         handle: '@barbeariareal_maceio',   initials: 'BR', from: '#d4145a', to: '#f3c65c' },
-    { name: 'Studio LS Cabelo',       handle: '@studiols_maceio',        initials: 'LS', from: '#f3c65c', to: '#ff5f9e' },
-    { name: 'Auto Peças Almeida',     handle: '@autopecasalmeida',       initials: 'AA', from: '#7a1740', to: '#f3c65c' },
-    { name: 'Doceria Melo',           handle: '@doceriamelo_maceio',     initials: 'DM', from: '#ef2d76', to: '#d99a2b' },
-    { name: 'Pet Shop Amigo Fiel',    handle: '@amigofiel_maceio',       initials: 'AF', from: '#b23a6b', to: '#ffe2a1' },
-  ];
-  const empresaLocation = 'Maceió, Alagoas';
+  { name: 'Magazine Luiza',     handle: '@magazineluiza',     url: 'https://www.instagram.com/magazineluiza',     initials: 'ML', from: '#ef2d76', to: '#f3c65c' },
+  { name: 'Americanas',         handle: '@americanas',        url: 'https://www.instagram.com/americanas',        initials: 'AM', from: '#f3c65c', to: '#ef2d76' },
+  { name: 'Havaianas',          handle: '@havaianas',         url: 'https://www.instagram.com/havaianas',         initials: 'HV', from: '#ff5f9e', to: '#ffe2a1' },
+  { name: 'Unimed Maceió',      handle: '@unimedmaceio',      url: 'https://www.instagram.com/unimedmaceio',      initials: 'UM', from: '#b0246e', to: '#f3c65c' },
+  { name: 'GBarbosa',           handle: '@gbarbosa',          url: 'https://www.instagram.com/gbarbosa',          initials: 'GB', from: '#ef2d76', to: '#ffe2a1' },
+  { name: 'Casa Vieira',        handle: '@casavieira',        url: 'https://www.instagram.com/casavieira',        initials: 'CV', from: '#d4145a', to: '#f3c65c' },
+  { name: 'Israel Perfumaria',  handle: '@israel.perfumaria',  url: 'https://www.instagram.com/israel.perfumaria?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',  initials: 'IP', from: '#f3c65c', to: '#ff5f9e' },
+  { name: 'Laser Eletro',       handle: '@lasereletro',       url: 'https://www.instagram.com/lasereletro',       initials: 'LE', from: '#7a1740', to: '#f3c65c' },
+  { name: 'Importadora Maceió', handle: '@importadoramaceio.oficial', url: 'https://www.instagram.com/importadoramaceio.oficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', initials: 'IM', from: '#ef2d76', to: '#d99a2b' },
+  { name: 'Abys',               handle: '@Lojasabys',         url: 'https://www.instagram.com/lojasabys?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',         initials: 'AB', from: '#b23a6b', to: '#ffe2a1' },
+];
+const empresaLocation = 'Maceió, Alagoas';
 
   // Gera uma imagem placeholder (gradiente + iniciais) em SVG — troque por uma foto/logo real
   // bastando editar o "imageSrc" usado abaixo (ex.: 'assets/empresa1.jpg').
@@ -1648,11 +1648,11 @@ document.addEventListener('DOMContentLoaded', () => {
       card.appendChild(figure);
 
       const meta = document.createElement('div');
-      meta.className = 'profile-meta';
-      meta.innerHTML =
-        '<div><strong>' + emp.handle + '</strong><small>' + empresaLocation + '</small></div>' +
-        '<a class="btn btn-ghost btn-sm" href="#" target="_blank" rel="noreferrer">Seguir</a>';
-      card.appendChild(meta);
+meta.className = 'profile-meta';
+meta.innerHTML =
+  '<div><strong>' + emp.handle + '</strong><small>' + empresaLocation + '</small></div>' +
+  '<a class="btn btn-ghost btn-sm" href="' + emp.url + '" target="_blank" rel="noreferrer">Seguir</a>';
+card.appendChild(meta);
 
       slide.appendChild(card);
       track.appendChild(slide);
