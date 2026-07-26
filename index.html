@@ -1494,6 +1494,30 @@ document.querySelectorAll('.video-play-btn').forEach(function (btn) {
           </span>
           <span class="contact-row-label">contato@reidasofertasmaceio.com</span>
         </a>
+        <!-- ===================== NOVOS CONTATOS: YOUTUBE E KWAI ===================== -->
+<!-- Cole estes dois blocos dentro da <div class="contact-list"> do seu HTML,
+     na posição que preferir (ex.: depois do Facebook e antes do e-mail). -->
+
+<a class="contact-row" href="https://m.youtube.com/channel/UC67fxTno3ET-yZf4Dbdsh0A?ra=m" target="_blank" rel="noreferrer">
+  <span class="icon-btn icon-youtube">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12z"/></svg>
+  </span>
+  <span class="contact-row-label">Rei das Ofertas Maceió no YouTube</span>
+</a>
+
+<a class="contact-row" href="https://k.kwai.com/u/@Reidasofertas_maceio/A3gAKCbp" target="_blank" rel="noreferrer">
+  <span class="icon-btn icon-kwai">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+  </span>
+  <span class="contact-row-label">@Reidasofertas_maceio no Kwai</span>
+</a>
+
+<!-- ===================== CSS EXTRA (cores de hover) ===================== -->
+<!-- Cole dentro da sua tag <style>, perto das outras regras .icon-instagram, .icon-tiktok etc. -->
+<style>
+.icon-youtube:hover, .contact-row:hover .icon-youtube { border-color: #ff0000; color: #ff0000; background: rgba(255,0,0,0.1); }
+.icon-kwai:hover, .contact-row:hover .icon-kwai { border-color: var(--gold); color: var(--gold); background: rgba(243,198,92,0.1); }
+</style>
       </div>
     </div>
     <form class="contact-form reveal" id="contactForm">
