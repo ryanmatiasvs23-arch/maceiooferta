@@ -9,10 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* =========================================================
-   Jaymson Davis — Rei das Ofertas Maceió
-   Tokens: fundo escuro, rosa vibrante + dourado (identidade "rei")
-   ========================================================= */
 
 :root {
   --bg: #0a0910;
@@ -1050,7 +1046,7 @@ input, textarea, button { font-family: inherit; }
       <div class="empresas-carousel">
         <button class="carousel-btn carousel-prev" id="empresaPrev" type="button" aria-label="Loja anterior">‹</button>
         <div class="empresas-track" id="empresaTrack">
-          <!-- Slides gerados via JS (ver função renderEmpresasSlides) usando o componente TiltedCard -->
+      
         </div>
         <button class="carousel-btn carousel-next" id="empresaNext" type="button" aria-label="Próxima loja">›</button>
       </div>
@@ -1058,32 +1054,7 @@ input, textarea, button { font-family: inherit; }
   </div>
 </section>
 
-<!-- ===================== 4. VÍDEOS DE MAIOR SUCESSO ===================== -->
-<!-- ===================== 4. VÍDEOS DE MAIOR SUCESSO ===================== -->
-<!-- ===================== 4. VÍDEOS DE MAIOR SUCESSO (ATUALIZADO) ===================== -->
-<!-- Substitua toda a seção <section id="videos" class="section section-alt"> ... </section>
-     do seu arquivo original por este bloco.
 
-     IMPORTANTE — TÍTULOS:
-     Troquei "Reel de sucesso" por um espaço reservado <h3 data-title>...</h3>.
-     Me diga o nome/assunto real de cada vídeo (na ordem abaixo) que eu atualizo:
-       1) DYxWoTgt58f  — 814K
-       2) DYNDhdAuLw5  — 475K
-       3) DW9nGiXEaks  — 438K
-       4) DWEwYE3jrb0  — 148K
-       5) DWPnDD0Duc8  — 136K
-       6) DYmgjbLOn9b  — 133K
-       7) DYe_ZG0OA56  — 132K
-       8) DZp3a66uWlH  — 115K
-       9) DbBa7VCtZhs  — 90K
-      10) DY2LRzQO0nq  — 80K
-
-     COMO FUNCIONA O PLAYER EMBUTIDO:
-     Cada card guarda o "shortcode" do reel em data-embed-id. Ao clicar em "Assistir",
-     o JS troca a miniatura por um <iframe> apontando para
-     https://www.instagram.com/reel/{shortcode}/embed, que toca o vídeo direto na página
-     (o Instagram permite esse embed público, sem precisar de login).
--->
 <section id="videos" class="section section-alt">
   <div class="container">
     <div class="section-head reveal">
@@ -1210,8 +1181,7 @@ input, textarea, button { font-family: inherit; }
   </div>
 </section>
 
-<!-- ===================== CSS extra para o player embutido ===================== -->
-<!-- Adicione este bloco dentro da tag <style> do seu site (perto do resto do CSS de .video-thumb) -->
+
 <style>
 .video-play-btn {
   display: inline-flex;
@@ -1223,7 +1193,7 @@ input, textarea, button { font-family: inherit; }
 .video-thumb {
   position: relative;
   overflow: hidden;
-  /* aspect-ratio já definido no CSS original (16 / 10) — não muda ao tocar o vídeo */
+ 
 }
 .video-thumb.is-playing {
   background: #000;
@@ -1238,9 +1208,7 @@ input, textarea, button { font-family: inherit; }
 }
 </style>
 
-<!-- ===================== JS extra para o player embutido ===================== -->
-<!-- Adicione este trecho dentro do seu <script> principal, dentro do DOMContentLoaded,
-     junto com o resto da lógica do carrossel de vídeos. -->
+
 <script>
 document.querySelectorAll('.video-play-btn').forEach(function (btn) {
   function playInline() {
@@ -1409,9 +1377,7 @@ document.querySelectorAll('.video-play-btn').forEach(function (btn) {
           </span>
           <span class="contact-row-label">contato@reidasofertasmaceio.com</span>
         </a>
-        <!-- ===================== NOVOS CONTATOS: YOUTUBE E KWAI ===================== -->
-<!-- Cole estes dois blocos dentro da <div class="contact-list"> do seu HTML,
-     na posição que preferir (ex.: depois do Facebook e antes do e-mail). -->
+     
 
 <a class="contact-row" href="https://m.youtube.com/channel/UC67fxTno3ET-yZf4Dbdsh0A?ra=m" target="_blank" rel="noreferrer">
   <span class="icon-btn icon-youtube">
@@ -1515,8 +1481,7 @@ window.addEventListener('load', () => {
 </script>
 
 <script>
-// Jaymson Davis — Rei das Ofertas Maceió
-// Cursor padrão do navegador (nenhum cursor customizado é usado aqui de propósito)
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ano no rodapé
@@ -1576,7 +1541,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===================== Empresas atendidas — TiltedCard =====================
-  // Dados das empresas (troque aqui nome/handle/cores para adicionar ou editar cards)
+
   const empresasData = [
   { name: 'Magazine Luiza',     handle: '@magazineluiza',     url: 'https://www.instagram.com/magazineluiza',     initials: 'ML', from: '#ef2d76', to: '#f3c65c' },
   { name: 'Americanas',         handle: '@americanas',        url: 'https://www.instagram.com/americanas',        initials: 'AM', from: '#f3c65c', to: '#ef2d76' },
@@ -1591,8 +1556,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ];
 const empresaLocation = 'Maceió, Alagoas';
 
-  // Gera uma imagem placeholder (gradiente + iniciais) em SVG — troque por uma foto/logo real
-  // bastando editar o "imageSrc" usado abaixo (ex.: 'assets/empresa1.jpg').
   function placeholderLogo(initials, from, to) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
       <defs>
@@ -1739,7 +1702,7 @@ card.appendChild(meta);
   initTiltedCards();
 
   // ===================== Fundo do Hero — SideRays =====================
-  // Reimplementação em WebGL puro (sem dependência da lib "ogl"), mesmo shader do componente original.
+
   function initSideRaysBackground(container, opts) {
     if (!container) return;
     const cfg = Object.assign({
@@ -2019,8 +1982,7 @@ card.appendChild(meta);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Envia via WhatsApp com os dados preenchidos.
-      // Troque o número abaixo (e no href do botão flutuante) pelo WhatsApp real.
+  
       const nome = form.nome.value.trim();
       const empresa = form.empresa.value.trim();
       const whatsapp = form.whatsapp.value.trim();
